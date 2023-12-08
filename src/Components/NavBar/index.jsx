@@ -13,7 +13,9 @@ export const NavBar = () => {
         <img src={imageBranch} alt="Logo da marca" />
         <h1>I Fóo minha</h1>
       </Branch>
-      <PiReceipt />
+
+      <PiReceipt className="icon" />
+      <span>0</span>
     </Container>
   );
 };
