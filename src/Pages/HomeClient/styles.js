@@ -4,6 +4,10 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.COLORS.DARK_400};
 
   height: 100%;
+
+  > footer {
+    margin-top: 1.5rem;
+  }
 `;
 
 export const AdvertisingContent = styled.div`

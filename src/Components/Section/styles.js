@@ -3,8 +3,6 @@ import styled from "styled-components";
 export const Container = styled.section`
   margin: 1.5rem 0 0 1rem;
 
-  border: red solid 1px;
-
   color: white;
 
   > h1 {
