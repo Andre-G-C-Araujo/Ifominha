@@ -9,4 +9,11 @@ export const Container = styled.button`
 
   border: none;
   border-radius: 0.3rem;
+
+  > svg {
+    font-size: 1.6rem;
+
+    margin-bottom: -0.5rem;
+    margin-right: 1rem;
+  }
 `;

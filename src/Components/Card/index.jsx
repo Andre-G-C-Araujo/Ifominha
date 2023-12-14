@@ -15,7 +15,6 @@ export const Card = ({ className }) => {
       />
 
       <h1 className="card-title">Salada Ravanello</h1>
-
       <p>Preço:Um x-Bacon</p>
 
       <div className="counterInput">

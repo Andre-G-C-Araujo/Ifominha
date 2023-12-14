@@ -1,5 +1,8 @@
 import { Container, Branch, Form } from "./styles";
 
+import { MdAlternateEmail } from "react-icons/md";
+import { FaLock } from "react-icons/fa";
+
 import imageBranch from "../../assets/Polygono.png";
 
 import { Input } from "../../Components/Input";
@@ -15,11 +18,16 @@ export const SignIn = () => {
       </Branch>
 
       <Form>
-        <Input title="E-mail" placeholder="exemplo@examplo.com.br" />
+        <Input
+          title="E-mail"
+          placeholder="exemplo@examplo.com.br"
+          Icon={MdAlternateEmail}
+        />
         <Input
           title="Senha"
           type="password"
           placeholder="No mínimo 6 caracteres"
+          Icon={FaLock}
         />
         <Button title="Entrar" />
       </Form>

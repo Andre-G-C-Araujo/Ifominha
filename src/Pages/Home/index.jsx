@@ -7,7 +7,7 @@ import { Card } from "../../Components/Card";
 import advertisingImg from "../../assets/pngegg.png";
 import { Footer } from "../../Components/Footer";
 
-export const HomeClient = () => {
+export const Home = () => {
   return (
     <div>
       <Container>

@@ -1,5 +1,10 @@
 import { Container } from "./styles";
 
-export const ButtonText = ({ title }) => {
-  return <Container>{title}</Container>;
+export const ButtonText = ({ title, Icon }) => {
+  return (
+    <Container>
+      {Icon ? <Icon /> : ""}
+      {title}
+    </Container>
+  );
 };

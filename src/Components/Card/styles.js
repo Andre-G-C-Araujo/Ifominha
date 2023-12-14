@@ -44,7 +44,6 @@ export const Container = styled.div`
   > h1 {
     font-size: 1rem;
   }
-
   > p {
     color: ${({ theme }) => theme.COLORS.CAKE_200};
   }
@@ -53,14 +52,14 @@ export const Container = styled.div`
     display: flex;
 
     gap: 1rem;
-    > input {
+    input {
       width: 1.5rem;
 
       text-align: center;
     }
   }
 
-  > button {
+  button {
     width: 100%;
   }
 `;

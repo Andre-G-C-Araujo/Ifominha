@@ -1,5 +1,10 @@
 import { Container } from "./styles";
 
-export const Button = ({ title }) => {
-  return <Container type="submit">{title}</Container>;
+export const Button = ({ title, Icon }) => {
+  return (
+    <Container type="submit">
+      {Icon ? <Icon /> : ""}
+      {title}
+    </Container>
+  );
 };
