@@ -25,7 +25,8 @@ export const RegisterItem = () => {
             alt="Foto do prato"
           />
         </Heading>
-        <Input type="file" title={"Imagem do prato"} />{" "}
+
+        {/* <Input type="file" title={"Imagem do prato"} />{" "} */}
         {/* Lembrar de importar e colocar esse input dentro do input... Considerar colocar SectionTag c/ input simples*/}
         <Input type="text" title={"Nome"} />
         <Select title={"Categoria"} />
@@ -40,7 +41,7 @@ export const RegisterItem = () => {
             "Fale brevemente sobre o prato, seus ingredientes e composição"
           }
         />
-        <Button title={"Salvar alterações"} linkto={"/"} />
+        <Button title={"Salvar alterações"} />
       </Content>
 
       <Footer />

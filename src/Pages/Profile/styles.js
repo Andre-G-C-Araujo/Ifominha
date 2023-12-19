@@ -33,6 +33,7 @@ export const Content = styled.form`
     width: fit-content;
   }
 
+  //all inputs
   > div {
     label {
       input {

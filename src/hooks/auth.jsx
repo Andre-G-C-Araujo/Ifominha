@@ -44,14 +44,22 @@ function AuthProvider({ children }) {
     setData({});
   }
 
-  async function updateProfile({ client }) {
+  async function updateProfile({ client, avatarFile }) {
     try {
+      if (avatarFile) {
+        const fileUploadForm = new FormData();
+        fileUploadForm.append("avatar", avatarFile);
+
+        const response = await api.patch("/clients/avatar", fileUploadForm);
+
+        client.avatar = response.data.avatar;
+      }
+
       await api.put("/clients", client);
       localStorage.setItem("@ifoominha:client", JSON.stringify(client));
 
       setData({ client, tokenClient: data.tokenClient });
       alert("Perfil Atualizado!");
-      console.log(data);
     } catch (error) {
       if (error.response) {
         alert(error.response.data.message);
@@ -86,20 +94,6 @@ function AuthProvider({ children }) {
       });
     }
   }, []);
-
-  // useEffect(() => {
-  //   const tokenAdmin = localStorage.getItem("@ifoominha:tokenAdmin");
-  //   const admin = localStorage.getItem("@ifoominha:admin");
-
-  //   if (tokenAdmin && admin) {
-  //     api.defaults.headers.common["Authorization"] = `Bearer ${tokenAdmin}`;
-
-  //     setData({
-  //       tokenAdmin,
-  //       client: JSON.parse(admin),
-  //     });
-  //   }
-  // }, []);
 
   return (
     <AuthContext.Provider

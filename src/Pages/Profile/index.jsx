@@ -2,6 +2,9 @@ import { useState } from "react";
 
 import { IoIosArrowBack } from "react-icons/io";
 
+import { api } from "../../services/api";
+import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
+
 import { Container, Content } from "./styles";
 import { NavBar } from "../../Components/NavBar";
 import { ButtonText } from "../../Components/ButtonText";
@@ -19,17 +22,31 @@ export const Profile = () => {
   const [newPassword, setNewPassword] = useState();
   const [oldPassword, setOldPassword] = useState();
 
+  const avatarUrl = client.avatar
+    ? `${api.defaults.baseURL}/files/${client.avatar}`
+    : avatarPlaceholder;
+  const [avatar, setAvatar] = useState(avatarUrl); //levar ela pro component?
+  const [avatarFile, setAvatarFile] = useState(null);
+
   async function handleUpdate() {
-    const client = {
+    const updated = {
       name,
       email,
       password: newPassword,
       old_password: oldPassword,
     };
 
-    // const clientUpdated = Object.assign(client, updatedClient);
+    const clientUpdated = Object.assign(client, updated);
 
-    await updateProfile({ client });
+    await updateProfile({ client: clientUpdated, avatarFile });
+  }
+
+  async function handleChangeAvatar(event) {
+    const file = event.target.files[0];
+    setAvatarFile(file);
+
+    const imagePreview = URL.createObjectURL(file);
+    setAvatar(imagePreview);
   }
 
   return (
@@ -37,7 +54,12 @@ export const Profile = () => {
       <NavBar />
       <Content>
         <ButtonText title={"Voltar"} Icon={IoIosArrowBack} to="/" />
-        <PhotoProfileComponent />
+        <PhotoProfileComponent
+          photo={avatar}
+          alter={"Foto do perfil do usúario"}
+          onChange={handleChangeAvatar}
+        />
+
         <Input
           type="text"
           placeholder={"Nome do Usuario"}
@@ -51,12 +73,12 @@ export const Profile = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
         <Input
-          type="text"
+          type="password"
           placeholder={"Senha Antiga"}
           onChange={(e) => setOldPassword(e.target.value)}
         />
         <Input
-          type="text"
+          type="password"
           placeholder={"Senha Atual"}
           onChange={(e) => setNewPassword(e.target.value)}
         />

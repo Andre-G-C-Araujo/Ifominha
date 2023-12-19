@@ -7,11 +7,12 @@ export const Container = styled.div`
   font-size: 0.8rem;
 
   img {
-    width: 50%;
+    width: 13rem;
+    height: 13rem;
 
     margin: 1rem auto;
 
-    border-radius: 50%;
+    border-radius: 9999px;
   }
 
   label {
