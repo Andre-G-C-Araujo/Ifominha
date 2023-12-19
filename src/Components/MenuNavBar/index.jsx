@@ -1,12 +1,14 @@
 import { Container } from "./styles";
 
+import { ButtonText } from "../ButtonText";
+
 import { IoClose } from "react-icons/io5";
 
-export const MenuNavBar = () => {
+export const MenuNavBar = ({ title }) => {
   return (
     <Container>
-      <IoClose />
-      <p>Menu</p>
+      <ButtonText Icon={IoClose} to="/" />
+      <p>{title}</p>
     </Container>
   );
 };

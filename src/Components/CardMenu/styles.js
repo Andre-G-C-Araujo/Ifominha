@@ -8,16 +8,19 @@ export const Container = styled.div`
 
   width: 100%;
 
-  /* 
-  .heartIcon {
-    position: absolute;
-    
+  svg {
+    position: relative;
+
     color: ${({ theme }) => theme.COLORS.LIGHT_300};
     font-size: 1.3rem;
-    
-    top: 0.75rem;
-    right: 0.75rem;
-  } */
+
+    top: 0rem;
+    left: 5.5rem;
+  }
+
+  .heartIcon {
+    color: ${({ theme }) => theme.COLORS.REDBLOOD};
+  }
 
   > img,
   h1,

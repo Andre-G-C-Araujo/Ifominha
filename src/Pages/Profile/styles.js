@@ -1,21 +1,5 @@
 import styled from "styled-components";
 
-export const Heading = styled.header`
-  display: flex;
-  flex-direction: column;
-
-  font-size: 0.8rem;
-
-  img {
-    width: 70%; // esse tamanho mesmo?
-
-    margin: 1rem auto;
-    display: none;
-
-    border-radius: 50%;
-  }
-`;
-
 export const Container = styled.div`
   font-family: "Roboto", sans-serif;
 
@@ -46,26 +30,34 @@ export const Content = styled.form`
   padding: 1rem;
 
   > a {
-    font-size: 1rem;
-  }
-
-  > div:nth-child(2) {
-    label {
-      input {
-        font-size: 0.6rem;
-      }
-    }
+    width: fit-content;
   }
 
   > div {
     label {
       input {
-        width: 100%;
-
         margin: 0;
       }
     }
   }
+
+  //Spacing input
+  > div:nth-child(3) {
+    label {
+      input {
+        margin-top: 1rem;
+      }
+    }
+  }
+
+  > div:nth-child(4) {
+    label {
+      input {
+        margin-bottom: 1.5rem;
+      }
+    }
+  }
+
   > button {
     width: 100%;
     padding: 1rem;

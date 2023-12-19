@@ -10,7 +10,7 @@ import { Footer } from "../../Components/Footer";
 import { CardMenu } from "../../Components/CardMenu";
 import { useNavigate } from "react-router-dom";
 
-export const Menu = () => {
+export const Favorites = () => {
   const navigate = useNavigate();
 
   function handleLinkTo(link) {
@@ -18,7 +18,7 @@ export const Menu = () => {
   }
   return (
     <Container>
-      <MenuNavBar title={"Menu"} />
+      <MenuNavBar title={"Favoritos"} />
       <SearchContent>
         <Input
           Icon={CiSearch}
@@ -26,7 +26,7 @@ export const Menu = () => {
         />
 
         <ContentCards>
-          <CardMenu isFavorite />
+          <CardMenu />
           <CardMenu />
           <CardMenu />
           <CardMenu />
@@ -45,7 +45,7 @@ export const Menu = () => {
         </ContentCards>
 
         <Button title={"Sair"} onClick={() => handleLinkTo("")} />
-        <Button title={"Favoritos"} onClick={() => handleLinkTo("favorites")} />
+        <Button title={"Menu"} onClick={() => handleLinkTo("menu")} />
       </SearchContent>
       <Footer />
     </Container>

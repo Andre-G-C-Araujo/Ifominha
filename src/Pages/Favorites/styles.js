@@ -29,7 +29,6 @@ export const SearchContent = styled.div`
 
     background-color: transparent;
   }
-
   > div {
     margin-bottom: 1rem;
   }

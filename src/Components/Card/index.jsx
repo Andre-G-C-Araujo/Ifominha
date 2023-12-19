@@ -19,7 +19,7 @@ export const Card = ({ className }) => {
 
       <div className="counterInput">
         <FaMinus />
-        <input type="number" id="points" name="points" step="1" value={0} />
+        <input type="number" id="points" name="points" step="1" />
         <FaPlus />
       </div>
 

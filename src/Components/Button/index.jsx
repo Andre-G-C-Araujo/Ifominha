@@ -1,8 +1,8 @@
 import { Container } from "./styles";
 
-export const Button = ({ title, Icon }) => {
+export const Button = ({ title, Icon, ...rest }) => {
   return (
-    <Container type="submit">
+    <Container type="submit" {...rest}>
       {Icon ? <Icon /> : ""}
       {title}
     </Container>

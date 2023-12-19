@@ -37,4 +37,13 @@ export const Branch = styled.div`
   margin-bottom: 5.4rem;
 `;
 
-export const Form = styled.form``;
+export const Form = styled.form`
+  > div {
+    margin: 1rem 0;
+    label {
+      input {
+        padding-left: 3rem;
+      }
+    }
+  }
+`;

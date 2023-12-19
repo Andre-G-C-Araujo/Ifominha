@@ -3,7 +3,9 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
 
-  /* position: absolute; */
+  position: sticky;
+  z-index: 1;
+  top: 0;
 
   justify-content: space-between;
 
@@ -46,5 +48,10 @@ export const Branch = styled.div`
   }
   > img {
     height: 2rem;
+  }
+
+  > p {
+    color: ${({ theme }) => theme.COLORS.CAKE_200};
+    margin: auto;
   }
 `;

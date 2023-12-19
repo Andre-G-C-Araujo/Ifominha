@@ -45,7 +45,7 @@ export const EditItem = () => {
         />
         <ButtonBottomContent>
           <Button title={"Excluir Prato"} />
-          <Button title={"Salvar alterações"} />
+          <Button title={"Salvar alterações"} linkto={"/"} />
         </ButtonBottomContent>
       </Content>
 

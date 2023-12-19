@@ -18,7 +18,6 @@ export const RegisterItem = () => {
       <NavBar />
       <Content>
         <ButtonText title={"Voltar"} Icon={IoIosArrowBack} />
-
         <Heading>
           <h1>Novo Prato</h1>
           <img
@@ -26,24 +25,22 @@ export const RegisterItem = () => {
             alt="Foto do prato"
           />
         </Heading>
-        <Input type="file" title={"Imagem do prato"} />
+        <Input type="file" title={"Imagem do prato"} />{" "}
+        {/* Lembrar de importar e colocar esse input dentro do input... Considerar colocar SectionTag c/ input simples*/}
         <Input type="text" title={"Nome"} />
-
         <Select title={"Categoria"} />
-
         <SectionTag title={"Ingredientes"}>
           <TagInput value={"Cenoura"} />
           <TagInput isnew placeholder={"Adicionar"} />
         </SectionTag>
         <Input title={"Preço"} type="text" placeholder={"R$ 00,00"} />
-
         <TextArea
           title={"Descrição"}
           placeholder={
             "Fale brevemente sobre o prato, seus ingredientes e composição"
           }
         />
-        <Button title={"Salvar alterações"} />
+        <Button title={"Salvar alterações"} linkto={"/"} />
       </Content>
 
       <Footer />
