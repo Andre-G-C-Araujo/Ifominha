@@ -8,6 +8,8 @@ export const Container = styled.div`
     border: none;
     border-radius: 0.6rem;
 
+    color: ${({ theme }) => theme.COLORS.LIGHT_300};
+
     background-color: ${({ theme }) => theme.COLORS.DARK_900};
   }
   ::placeholder {

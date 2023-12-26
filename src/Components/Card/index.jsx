@@ -5,7 +5,7 @@ import { Container } from "./styles";
 
 import { Button } from "../Button";
 
-export const Card = ({ className }) => {
+export const Card = ({}) => {
   return (
     <Container className="card">
       <FaRegHeart className="heartIcon" />

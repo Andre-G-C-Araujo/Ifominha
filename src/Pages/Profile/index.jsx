@@ -13,17 +13,27 @@ import { Footer } from "../../Components/Footer";
 import { Button } from "../../Components/Button";
 import { PhotoProfileComponent } from "../../Components/PhotoProfile";
 import { useAuth } from "../../hooks/auth";
+import { useNavigate } from "react-router-dom";
 
 export const Profile = () => {
-  const { client, updateProfile } = useAuth();
+  const { client, updateProfile, admin } = useAuth();
+  const navigate = useNavigate();
 
-  const [name, setName] = useState(client.name);
-  const [email, setEmail] = useState(client.email);
+  let user;
+
+  if (client) {
+    user = client;
+  } else {
+    user = admin;
+  }
+
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
   const [newPassword, setNewPassword] = useState();
   const [oldPassword, setOldPassword] = useState();
 
-  const avatarUrl = client.avatar
-    ? `${api.defaults.baseURL}/files/${client.avatar}`
+  const avatarUrl = user.avatar
+    ? `${api.defaults.baseURL}/files/${user.avatar}`
     : avatarPlaceholder;
   const [avatar, setAvatar] = useState(avatarUrl); //levar ela pro component?
   const [avatarFile, setAvatarFile] = useState(null);
@@ -36,17 +46,35 @@ export const Profile = () => {
       old_password: oldPassword,
     };
 
-    const clientUpdated = Object.assign(client, updated);
+    const userUpdated = Object.assign(user, updated);
 
-    await updateProfile({ client: clientUpdated, avatarFile });
+    if (user === client) {
+      navigate("/");
+      return await updateProfile({
+        client: userUpdated,
+
+        avatarFile,
+      });
+    } else {
+      navigate("/");
+      return await updateProfile({
+        admin: userUpdated,
+
+        avatarFile,
+      });
+    }
   }
 
   async function handleChangeAvatar(event) {
     const file = event.target.files[0];
+
     setAvatarFile(file);
 
-    const imagePreview = URL.createObjectURL(file);
-    setAvatar(imagePreview);
+    if (file) {
+      const imagePreview = URL.createObjectURL(file);
+
+      setAvatar(imagePreview);
+    }
   }
 
   return (

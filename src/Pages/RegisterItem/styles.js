@@ -7,12 +7,28 @@ export const Heading = styled.header`
   font-size: 0.8rem;
 
   img {
-    width: 70%; // esse tamanho mesmo?
+    width: 60%; // esse tamanho mesmo?
 
     margin: 1rem auto;
-    display: none;
 
     border-radius: 50%;
+  }
+
+  > label {
+    width: 100%;
+    height: 3.2rem;
+
+    background-color: ${({ theme }) => theme.COLORS.DARK_900};
+
+    border: none;
+    border-radius: 0.6rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    > input {
+      margin-left: 5rem;
+    }
   }
 `;
 

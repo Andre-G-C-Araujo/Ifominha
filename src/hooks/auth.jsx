@@ -44,22 +44,38 @@ function AuthProvider({ children }) {
     setData({});
   }
 
-  async function updateProfile({ client, avatarFile }) {
+  async function updateProfile({ client, admin, avatarFile }) {
     try {
       if (avatarFile) {
         const fileUploadForm = new FormData();
         fileUploadForm.append("avatar", avatarFile);
 
-        const response = await api.patch("/clients/avatar", fileUploadForm);
+        if (client) {
+          const response = await api.patch("/clients/avatar", fileUploadForm);
 
-        client.avatar = response.data.avatar;
+          console.log(client);
+          client.avatar = response.data.avatar;
+        }
+
+        if (admin) {
+          const response = await api.patch("/admin/avatar", fileUploadForm);
+          admin.avatar = response.data.avatar;
+        }
       }
+      if (client) {
+        await api.put("/clients", client);
+        localStorage.setItem("@ifoominha:client", JSON.stringify(client));
 
-      await api.put("/clients", client);
-      localStorage.setItem("@ifoominha:client", JSON.stringify(client));
+        setData({ client, tokenClient: data.tokenClient });
+        alert("Perfil Atualizado!");
+      }
+      if (admin) {
+        await api.put("/admin", admin);
+        localStorage.setItem("@ifoominha:admin", JSON.stringify(admin));
 
-      setData({ client, tokenClient: data.tokenClient });
-      alert("Perfil Atualizado!");
+        setData({ admin, tokenAdmin: data.tokenAdmin });
+        alert("Perfil Atualizado!");
+      }
     } catch (error) {
       if (error.response) {
         alert(error.response.data.message);
@@ -67,6 +83,15 @@ function AuthProvider({ children }) {
         alert("Não foi possível atualizar o perfil.");
       }
     }
+  }
+
+  async function handleFormAvatarReferencePlate({ prato, avatarFile }) {
+    const fileUploadForm = new FormData();
+    fileUploadForm.append("avatar", avatarFile);
+
+    const response = await api.patch("/pratos/avatar", fileUploadForm);
+
+    prato.avatar = response.data.avatar;
   }
 
   useEffect(() => {
@@ -99,10 +124,13 @@ function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         updateProfile,
+        handleFormAvatarReferencePlate,
+
         signOut,
         signIn,
         client: data.client,
         admin: data.admin,
+        pratos: data.pratos,
       }}
     >
       {children}

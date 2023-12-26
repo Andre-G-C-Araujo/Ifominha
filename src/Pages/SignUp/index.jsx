@@ -9,29 +9,32 @@ import { api } from "../../services/api";
 import { Input } from "../../Components/Input";
 import { Button } from "../../Components/Button";
 import { ButtonText } from "../../Components/ButtonText";
-import { useAuth } from "../../hooks/auth";
+
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export const SignUp = () => {
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { admin } = useAuth();
-
   function handleSignUp() {
     if (!name || !email || !password) {
-      return alert("Preencha todos os campos!");
+      return toast.warn("Preencha todos os campos!");
     }
     api
       .post("/clients", { name, email, password })
       .then(() => {
-        alert("Usuário Cadastrado com sucesso");
+        toast.success("Usuário Cadastrado com sucesso");
+        navigate("/");
       })
       .catch((error) => {
         if (error.response) {
-          alert(error.response.data.message);
+          toast.error(error.response.data.message);
         } else {
-          alert("Não foi possível realizar o Cadastro");
+          toast.error("Não foi possível realizar o Cadastro");
         }
       });
   }

@@ -9,8 +9,6 @@ import { AppAdminRoutes } from "./appAdmin.routes";
 export function Routes() {
   const { client, admin } = useAuth();
 
-  let witchUser;
-
   if (client) {
     return (
       <BrowserRouter>
