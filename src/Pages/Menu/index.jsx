@@ -9,13 +9,29 @@ import { Footer } from "../../Components/Footer";
 
 import { CardMenu } from "../../Components/CardMenu";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { api } from "../../services/api";
 
 export const Menu = () => {
+  const [search, setSearch] = useState("");
+  const [ingredients, setIngredients] = useState([]);
+  const [pratos, setPratos] = useState([]);
+
   const navigate = useNavigate();
 
   function handleLinkTo(link) {
     navigate(`/${link}`);
   }
+
+  useEffect(() => {
+    async function fetchNotes() {
+      const response = await api.get("/pratos?name&category");
+
+      setPratos(response.data);
+    }
+    fetchNotes();
+  }, []);
+
   return (
     <Container>
       <MenuNavBar title={"Menu"} />
@@ -26,22 +42,18 @@ export const Menu = () => {
         />
 
         <ContentCards>
-          <CardMenu isFavorite />
-          <CardMenu />
-          <CardMenu />
-          <CardMenu />
-          <CardMenu />
-          <CardMenu />
-          <CardMenu />
-          <CardMenu />
-          <CardMenu />
-          <CardMenu />
-          <CardMenu />
-          <CardMenu />
-          <CardMenu />
-          <CardMenu />
-          <CardMenu />
-          <CardMenu />
+          {pratos.map((item, index) => {
+            return (
+              <CardMenu
+                key={index}
+                name={item.name}
+                price={item.price}
+                avatar={item.avatar}
+                plateId={item.id}
+                ingredients={item.ingredients}
+              />
+            );
+          })}
         </ContentCards>
 
         <Button title={"Sair"} onClick={() => handleLinkTo("")} />

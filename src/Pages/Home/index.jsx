@@ -8,14 +8,17 @@ import { api } from "../../services/api";
 
 import advertisingImg from "../../assets/pngegg.png";
 import { Footer } from "../../Components/Footer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const Home = () => {
+  const [plates, setPlates] = useState([]);
+
   useEffect(() => {
-    api.get("/pratos/:id").then((req, res) => {
-      console.log(req);
-      console.log(res);
-    });
+    async function fetchPlate() {
+      const response = await api.get(`/pratos?name&category`);
+      setPlates(response.data);
+    }
+    fetchPlate();
   }, []);
 
   return (
@@ -31,26 +34,54 @@ export const Home = () => {
         </AdvertisingContent>
 
         <Section title={"Saladas"}>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {plates.map((item, index) => {
+            if (item.category === "Salada") {
+              return (
+                <Card
+                  key={index}
+                  plateId={item.id}
+                  name={item.name}
+                  avatar={item.avatar}
+                  price={item.price}
+                />
+              );
+            }
+            return null;
+          })}
         </Section>
 
-        <Section title={"Carnes"}>
-          <Card />
-          <Card />
+        <Section title={"Bebidas"}>
+          {plates.map((item, index) => {
+            if (item.category === "Bebidas") {
+              return (
+                <Card
+                  key={index}
+                  plateId={item.id}
+                  name={item.name}
+                  avatar={item.avatar}
+                  price={item.price}
+                />
+              );
+            }
+            return null;
+          })}
         </Section>
 
-        <Section title={"Lanches"}>
-          <Card />
-          <Card />
+        <Section title={"Refeiçoes"}>
+          {plates.map((item, index) => {
+            if (item.category === "Refeição") {
+              return (
+                <Card
+                  key={index}
+                  plateId={item.id}
+                  name={item.name}
+                  avatar={item.avatar}
+                  price={item.price}
+                />
+              );
+            }
+            return null;
+          })}
         </Section>
 
         <Footer />

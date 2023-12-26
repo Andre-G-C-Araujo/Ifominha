@@ -66,7 +66,7 @@ export const LeftContentCard = styled.div`
   border-right: ${({ theme }) => `${theme.COLORS.DARK_1000} solid 2px;`};
 
   align-items: center;
-  max-width: 40%;
+  min-width: 30%;
 
   > img,
   h1,
@@ -108,5 +108,13 @@ export const RightContentCard = styled.div`
     width: 50%;
     height: 2rem;
     margin-top: 0.5rem;
+  }
+
+  > p {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+
+    height: 40%;
   }
 `;

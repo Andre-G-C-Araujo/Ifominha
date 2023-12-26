@@ -25,7 +25,8 @@ export const Content = styled.div`
   padding: 1rem;
 
   > img {
-    width: 70%;
+    width: 13rem;
+    height: 13rem;
 
     margin: 1rem auto;
 
@@ -49,6 +50,8 @@ export const DescriptionContent = styled.div`
 
   gap: 1.5rem;
 
+  text-align: center;
+
   > h1 {
     font-size: 1.8rem;
     line-height: 2rem;
@@ -56,6 +59,18 @@ export const DescriptionContent = styled.div`
     margin-top: 1rem;
     text-align: center;
   }
+`;
+
+export const TagContent = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  width: 100%;
+
+  gap: 1rem;
+  padding: 0.5rem;
 `;
 
 export const ButtonContent = styled.div`
@@ -85,7 +100,7 @@ export const ButtonContent = styled.div`
       font-size: 1.3rem;
 
       background-color: transparent;
-      color: black;
+      color: ${({ theme }) => theme.COLORS.LIGHT_300};
 
       border: none;
     }

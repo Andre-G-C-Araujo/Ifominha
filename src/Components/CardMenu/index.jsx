@@ -1,32 +1,45 @@
 import { FaRegHeart } from "react-icons/fa";
 
 import { Container, LeftContentCard, RightContentCard } from "./styles";
+import platesPlaceholder from "../../assets/prato.png";
 
+import { Tags } from "../Tags";
 import { Button } from "../Button";
+import { api } from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
-export const CardMenu = ({ isFavorite = false }) => {
+export const CardMenu = ({ name, avatar, price, plateId, ingredients }) => {
   // console.log(isFavorite);
+
+  const avatarUrl = avatar
+    ? `${api.defaults.baseURL}/files/${avatar}`
+    : platesPlaceholder;
+
+  const decimalNumber = parseFloat(price).toFixed(2);
+
+  const navigate = useNavigate();
+
+  function showDetailsItem(id) {
+    navigate(`/itemdetails/${id}`);
+  }
 
   return (
     <Container className="card">
       <LeftContentCard>
-        <h1>Salada Ravanello Strognofe</h1>
+        <h1>{name}</h1>
 
-        <img
-          src="https://github.com/Andre-G-C-Araujo.png"
-          alt="Foto do prato escolhido"
-        />
-        <p>Preço: 14,99</p>
+        <img src={avatarUrl} alt="Foto do prato escolhido" />
+        <p>{`Preço: ${decimalNumber}`}</p>
       </LeftContentCard>
       <RightContentCard>
-        {isFavorite ? <FaRegHeart className="heartIcon" /> : <FaRegHeart />}
+        {/* {isFavorite ? <FaRegHeart className="heartIcon" /> : <FaRegHeart />} */}
         <h1>Ingredientes</h1>
         <p>
-          Alface, Almodengona, Catupiris, Cheddar, Prato, Prado, LuisVitton,
-          Carne moida
+          {ingredients.map((item) => {
+            return <Tags name={item.name} />;
+          })}
         </p>
-        <Button title={"Detalhes"} />
-        {/*linkto={`itemdetails/:${id}`} */}
+        <Button title={"Detalhes"} onClick={() => showDetailsItem(plateId)} />
       </RightContentCard>
     </Container>
   );
