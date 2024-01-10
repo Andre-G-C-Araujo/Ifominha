@@ -6,11 +6,7 @@ export const AuthContext = createContext({});
 
 function AuthProvider({ children }) {
   const [data, setData] = useState({});
-  const initialStateFav = localStorage.getItem("@ifoominha:favorites");
-
-  const [favorites, setFavorites] = useState(
-    initialStateFav ? JSON.parse(initialStateFav) : []
-  );
+  const [favorites, setFavorites] = useState([]);
 
   async function signIn({ email, password }) {
     try {
@@ -99,34 +95,17 @@ function AuthProvider({ children }) {
     prato.avatar = response.data.avatar;
   }
 
-  async function handleStateFavorites({ id }) {
+  async function handleStateFavorites({ id, client }) {
+    console.log(id);
     setFavorites((prevState) => [...prevState, id]);
+    console.log(favorites);
+    const response = await api.patch("/clients/favorites", {
+      plateId: favorites,
+      client,
+    });
+
+    client.favorites = response.data;
   }
-  async function handleDeleteStateFavorite({ id }) {
-    const arrayFiltered = favorites.filter((item) => item !== id);
-    setFavorites(arrayFiltered);
-  }
-
-  useEffect(() => {
-    const { client } = data;
-    async function updateFavorites() {
-      await api.patch("/clients/favorites", {
-        client: data.client,
-        plateId: data.client.favorites,
-      });
-    }
-
-    if (client) {
-      client.favorites = favorites;
-
-      setData({ client, tokenClient: data.tokenClient });
-      updateFavorites();
-      localStorage.setItem(
-        "@ifoominha:favorites",
-        JSON.stringify(client.favorites)
-      );
-    }
-  }, [favorites]);
 
   useEffect(() => {
     const tokenClient = localStorage.getItem("@ifoominha:tokenClient");
@@ -159,7 +138,6 @@ function AuthProvider({ children }) {
       value={{
         updateProfile,
         handleFormAvatarReferencePlate,
-        handleDeleteStateFavorite,
         handleStateFavorites,
         signOut,
         signIn,

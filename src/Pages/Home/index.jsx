@@ -34,8 +34,9 @@ export const Home = () => {
         </AdvertisingContent>
 
         <Section title={"Saladas"}>
-          {plates.map((item, index) => {
-            if (item.category === "Salada") {
+          {plates
+            .filter((plate) => plate.category === "Salada")
+            .map((item, index) => {
               return (
                 <Card
                   key={index}
@@ -45,14 +46,13 @@ export const Home = () => {
                   price={item.price}
                 />
               );
-            }
-            return null;
-          })}
+            })}
         </Section>
 
         <Section title={"Bebidas"}>
-          {plates.map((item, index) => {
-            if (item.category === "Bebidas") {
+          {plates
+            .filter((plate) => plate.category === "Bebidas")
+            .map((item, index) => {
               return (
                 <Card
                   key={index}
@@ -62,14 +62,13 @@ export const Home = () => {
                   price={item.price}
                 />
               );
-            }
-            return null;
-          })}
+            })}
         </Section>
 
-        <Section title={"Refeiçoes"}>
-          {plates.map((item, index) => {
-            if (item.category === "Refeição") {
+        <Section title={"Refeição"}>
+          {plates
+            .filter((plate) => plate.category === "Refeição")
+            .map((item, index) => {
               return (
                 <Card
                   key={index}
@@ -79,9 +78,7 @@ export const Home = () => {
                   price={item.price}
                 />
               );
-            }
-            return null;
-          })}
+            })}
         </Section>
 
         <Footer />

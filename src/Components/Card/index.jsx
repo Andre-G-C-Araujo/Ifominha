@@ -7,14 +7,20 @@ import avatarPlaceholder from "../../assets/avatar_placeholder.svg";
 import { Button } from "../Button";
 import { api } from "../../services/api";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useAuth } from "../../hooks/auth";
 
 export const Card = ({ name, avatar, price, plateId }) => {
+  const { handleStateFavorites, handleDeleteStateFavorite } = useAuth();
+
   const avatarUrl = avatar
     ? `${api.defaults.baseURL}/files/${avatar}`
     : avatarPlaceholder;
   const [counter, setCounter] = useState(1);
+  const [favIconColor, setFavIconColor] = useState("");
+
+  const [getFavLocalStore, setGetFavLocalStore] = useState();
 
   const priceTotalItens = price * counter;
   const decimalNumber = parseFloat(priceTotalItens).toFixed(2);
@@ -35,9 +41,34 @@ export const Card = ({ name, avatar, price, plateId }) => {
     navigate(`/itemdetails/${id}`);
   }
 
+  async function handleIndexFavorites(id) {
+    if (favIconColor === "") {
+      setFavIconColor("heartIcon");
+      handleStateFavorites({ id });
+    } else {
+      setFavIconColor("");
+      handleDeleteStateFavorite({ id });
+    }
+  }
+
+  useEffect(() => {
+    async function getFavoritesArrayFromLocalStore() {
+      const arrayFavString = localStorage.getItem("@ifoominha:favorites");
+      const arrayFav = JSON.parse(arrayFavString);
+
+      arrayFav
+        .filter((item) => plateId === item)
+        .map(() => setFavIconColor("heartIcon"));
+    }
+    getFavoritesArrayFromLocalStore();
+  }, []);
+
   return (
     <Container className="card">
-      <FaRegHeart className="heartIcon" />
+      <FaRegHeart
+        className={favIconColor}
+        onClick={() => handleIndexFavorites(plateId)}
+      />
       <img
         src={avatarUrl}
         alt="Foto do prato escolhido"

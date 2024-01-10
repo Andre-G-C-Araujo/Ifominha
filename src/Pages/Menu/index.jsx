@@ -25,12 +25,12 @@ export const Menu = () => {
 
   useEffect(() => {
     async function fetchNotes() {
-      const response = await api.get("/pratos?name&category");
-
+      const response = await api.get(`/pratos?name=${search}&category`);
+      console.log(response.data);
       setPratos(response.data);
     }
     fetchNotes();
-  }, []);
+  }, [search]);
 
   return (
     <Container>

@@ -18,7 +18,7 @@ export const Container = styled.div`
   border-radius: 0.3rem;
   border: 2px solid #000;
 
-  .heartIcon {
+  > svg {
     position: absolute;
 
     color: ${({ theme }) => theme.COLORS.LIGHT_300};
@@ -26,6 +26,10 @@ export const Container = styled.div`
 
     top: 0.75rem;
     right: 0.75rem;
+  }
+
+  .heartIcon {
+    color: red;
   }
 
   > img,
