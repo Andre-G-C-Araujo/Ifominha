@@ -9,9 +9,13 @@ import { api } from "../../services/api";
 import advertisingImg from "../../assets/pngegg.png";
 import { Footer } from "../../Components/Footer";
 import { useEffect, useState } from "react";
+import { useAuth } from "../../hooks/auth";
 
 export const Home = () => {
+  const { client } = useAuth();
+
   const [plates, setPlates] = useState([]);
+  const [arrayFav, setArrayFav] = useState([]);
 
   useEffect(() => {
     async function fetchPlate() {
@@ -19,6 +23,25 @@ export const Home = () => {
       setPlates(response.data);
     }
     fetchPlate();
+  }, []);
+
+  useEffect(() => {
+    async function fecthFavorites() {
+      const arrayFavClient = client.favorites;
+      console.log(typeof arrayFavClient);
+
+      if (typeof arrayFavClient === "string") {
+        console.log("String para converter");
+        localStorage.setItem("@ifoominha:favorites", arrayFavClient);
+      } else {
+        console.log("Object para converter");
+        localStorage.setItem(
+          "@ifoominha:favorites",
+          JSON.stringify(arrayFavClient)
+        );
+      }
+    }
+    fecthFavorites();
   }, []);
 
   return (
@@ -44,6 +67,7 @@ export const Home = () => {
                   name={item.name}
                   avatar={item.avatar}
                   price={item.price}
+                  arrayFav={arrayFav}
                 />
               );
             })}

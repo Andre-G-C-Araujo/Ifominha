@@ -45,6 +45,7 @@ function AuthProvider({ children }) {
     localStorage.removeItem("@ifoominha:tokenClient");
     localStorage.removeItem("@ifoominha:admin");
     localStorage.removeItem("@ifoominha:tokenAdmin");
+    localStorage.removeItem("@ifoominha:favorites");
 
     setData({});
   }
@@ -100,7 +101,19 @@ function AuthProvider({ children }) {
   }
 
   async function handleStateFavorites({ id }) {
-    setFavorites((prevState) => [...prevState, id]);
+    const initialArray = JSON.parse(
+      localStorage.getItem("@ifoominha:favorites")
+    );
+
+    if (initialArray === null) {
+      setFavorites([]);
+    }
+
+    if (initialArray) {
+      setFavorites([...initialArray, id]);
+    } else {
+      setFavorites((prevState) => [...prevState, id]);
+    }
   }
   async function handleDeleteStateFavorite({ id }) {
     const arrayFiltered = favorites.filter((item) => item !== id);
@@ -121,10 +134,9 @@ function AuthProvider({ children }) {
 
       setData({ client, tokenClient: data.tokenClient });
       updateFavorites();
-      localStorage.setItem(
-        "@ifoominha:favorites",
-        JSON.stringify(client.favorites)
-      );
+
+      localStorage.setItem("@ifoominha:client", JSON.stringify(client));
+      localStorage.setItem("@ifoominha:favorites", JSON.stringify(favorites));
     }
   }, [favorites]);
 
