@@ -35,11 +35,10 @@ export const SearchContent = styled.div`
 `;
 
 export const ContentCards = styled.div`
-  // border: "red solid 1px",
   display: flex;
   flex-wrap: wrap;
 
-  max-height: 24rem;
+  max-height: 28rem;
   margin-bottom: 1rem;
 
   overflow-x: auto;

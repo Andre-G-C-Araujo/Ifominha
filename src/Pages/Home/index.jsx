@@ -19,7 +19,7 @@ export const Home = () => {
 
   useEffect(() => {
     async function fetchPlate() {
-      const response = await api.get(`/pratos?name&category`);
+      const response = await api.get(`/pratos?name&category&ingredients`);
       setPlates(response.data);
     }
     fetchPlate();

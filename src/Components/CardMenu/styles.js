@@ -8,24 +8,22 @@ export const Container = styled.div`
 
   width: 100%;
 
-  svg {
-    position: relative;
-
-    color: ${({ theme }) => theme.COLORS.LIGHT_300};
-    font-size: 1.3rem;
-
-    top: 0rem;
-    left: 5.5rem;
-  }
-
   .heartIcon {
     color: ${({ theme }) => theme.COLORS.REDBLOOD};
+    display: flex;
+    position: relative;
+
+    margin-top: -1.2rem;
+
+    top: 1.5rem;
+    left: 11.5rem;
+    font-size: 1.3rem;
   }
 
   > img,
   h1,
   p {
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
   }
 
   > img {
@@ -39,17 +37,6 @@ export const Container = styled.div`
   }
   > p {
     color: ${({ theme }) => theme.COLORS.CAKE_200};
-  }
-
-  .counterInput {
-    display: flex;
-
-    gap: 1rem;
-    input {
-      width: 1.5rem;
-
-      text-align: center;
-    }
   }
 
   button {
@@ -66,7 +53,7 @@ export const LeftContentCard = styled.div`
   border-right: ${({ theme }) => `${theme.COLORS.DARK_1000} solid 2px;`};
 
   align-items: center;
-  min-width: 30%;
+  width: 9rem;
 
   > img,
   h1,
@@ -88,6 +75,12 @@ export const LeftContentCard = styled.div`
   > p {
     color: ${({ theme }) => theme.COLORS.CAKE_200};
   }
+
+  > button {
+    width: 50%;
+    height: 2rem;
+    margin-top: 1.2rem;
+  }
 `;
 
 export const RightContentCard = styled.div`
@@ -96,18 +89,11 @@ export const RightContentCard = styled.div`
 
   padding: 0.5rem;
 
-  align-items: center;
-  width: 60%;
+  width: 70%;
 
   > h1 {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     text-align: center;
-  }
-
-  > button {
-    width: 50%;
-    height: 2rem;
-    margin-top: 0.5rem;
   }
 
   > p {
@@ -116,5 +102,28 @@ export const RightContentCard = styled.div`
     gap: 0.7rem;
 
     height: 40%;
+  }
+
+  > div {
+    display: flex;
+
+    gap: 0.8rem;
+
+    width: fit-content;
+    height: 1.5rem;
+    margin: 1rem auto 0;
+
+    input {
+      text-align: center;
+      width: 2rem;
+    }
+    svg {
+      font-size: 1.4rem;
+    }
+  }
+  > button {
+    width: 50%;
+    height: 2rem;
+    margin: 0.5rem auto;
   }
 `;
