@@ -7,11 +7,23 @@ import { Tags } from "../Tags";
 import { Button } from "../Button";
 import { api } from "../../services/api";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useAuth } from "../../hooks/auth";
 
-export const CardMenu = ({ name, avatar, price, plateId, ingredients }) => {
+export const CardMenu = ({
+  name,
+  avatar,
+  price,
+  plateId,
+  ingredients,
+  icon,
+}) => {
   const [counter, setCounter] = useState(1);
+  const [favIconColor, setFavIconColor] = useState("");
+
+  const { handleStateFavorites, handleDeleteStateFavorite } = useAuth();
+
   const avatarUrl = avatar
     ? `${api.defaults.baseURL}/files/${avatar}`
     : platesPlaceholder;
@@ -34,17 +46,46 @@ export const CardMenu = ({ name, avatar, price, plateId, ingredients }) => {
     }
   }
 
+  async function handleIndexFavorites(id) {
+    if (favIconColor === "heartIcon") {
+      handleDeleteStateFavorite({ id });
+      setFavIconColor("");
+    } else {
+      setFavIconColor("heartIcon");
+      handleStateFavorites({ id });
+    }
+  }
+
+  useEffect(() => {
+    async function getFavoritesArrayFromLocalStore() {
+      const getArrayFavFromLocalStorage = localStorage.getItem(
+        "@ifoominha:favorites"
+      );
+      console.log(getArrayFavFromLocalStorage);
+      const newArrayFav = JSON.parse(getArrayFavFromLocalStorage);
+
+      if (newArrayFav) {
+        newArrayFav
+          .filter((item) => plateId === item)
+          .map(() => setFavIconColor("heartIcon"));
+      }
+    }
+    getFavoritesArrayFromLocalStore();
+  }, []);
+
   return (
-    <Container className="card">
+    <Container className={`card`}>
       <LeftContentCard>
         <h1>{name}</h1>
-
         <img src={avatarUrl} alt="Foto do prato escolhido" />
         <p>{`Preço: ${decimalNumber}`}</p>
         <Button title={"Detalhes"} onClick={() => showDetailsItem(plateId)} />
       </LeftContentCard>
       <RightContentCard>
-        <FaRegHeart className="heartIcon" />
+        <FaRegHeart
+          className={`icon ${icon ? "heartIcon" : favIconColor}`}
+          onClick={() => handleIndexFavorites(plateId)}
+        />
         <h1>Ingredientes</h1>
         <p>
           {ingredients.map((item) => {

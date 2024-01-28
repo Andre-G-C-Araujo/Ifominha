@@ -100,6 +100,8 @@ function AuthProvider({ children }) {
     prato.avatar = response.data.avatar;
   }
 
+  async function updatePlateByAdmin(prato) {}
+
   async function handleStateFavorites({ id }) {
     const initialArray = JSON.parse(
       localStorage.getItem("@ifoominha:favorites")
@@ -173,11 +175,12 @@ function AuthProvider({ children }) {
         handleFormAvatarReferencePlate,
         handleDeleteStateFavorite,
         handleStateFavorites,
+        updatePlateByAdmin,
         signOut,
         signIn,
         client: data.client,
         admin: data.admin,
-        pratos: data.pratos,
+        pratos: data.pratos, //vou tirar o s dos pratos
       }}
     >
       {children}

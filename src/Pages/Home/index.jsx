@@ -12,10 +12,9 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/auth";
 
 export const Home = () => {
-  const { client } = useAuth();
+  const { client, admin } = useAuth();
 
   const [plates, setPlates] = useState([]);
-  const [arrayFav, setArrayFav] = useState([]);
 
   useEffect(() => {
     async function fetchPlate() {
@@ -27,18 +26,22 @@ export const Home = () => {
 
   useEffect(() => {
     async function fecthFavorites() {
-      const arrayFavClient = client.favorites;
-      console.log(typeof arrayFavClient);
-
-      if (typeof arrayFavClient === "string") {
-        console.log("String para converter");
-        localStorage.setItem("@ifoominha:favorites", arrayFavClient);
+      if (admin) {
+        return;
       } else {
-        console.log("Object para converter");
-        localStorage.setItem(
-          "@ifoominha:favorites",
-          JSON.stringify(arrayFavClient)
-        );
+        const arrayFavClient = client.favorites;
+        console.log(typeof arrayFavClient);
+
+        if (typeof arrayFavClient === "string") {
+          console.log("String para converter");
+          localStorage.setItem("@ifoominha:favorites", arrayFavClient);
+        } else {
+          console.log("Object para converter");
+          localStorage.setItem(
+            "@ifoominha:favorites",
+            JSON.stringify(arrayFavClient)
+          );
+        }
       }
     }
     fecthFavorites();
@@ -67,7 +70,6 @@ export const Home = () => {
                   name={item.name}
                   avatar={item.avatar}
                   price={item.price}
-                  arrayFav={arrayFav}
                 />
               );
             })}

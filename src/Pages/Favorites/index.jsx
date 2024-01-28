@@ -2,10 +2,7 @@ import { useEffect, useState } from "react";
 
 import { Container, ContentCards, SearchContent } from "./styles";
 
-import { CiSearch } from "react-icons/ci";
-
 import { MenuNavBar } from "../../Components/MenuNavBar";
-import { Input } from "../../Components/Input";
 import { Button } from "../../Components/Button";
 import { Footer } from "../../Components/Footer";
 
@@ -28,10 +25,11 @@ export const Favorites = () => {
       const response = await api.get(`/pratos?name&category&ingredients`);
       setPratos(response.data);
       const arrayLocalStorage = localStorage.getItem("@ifoominha:favorites");
+
       setFavoritesIds(JSON.parse(arrayLocalStorage));
     }
     fetchPlate();
-  }, []);
+  }, [pratos]);
 
   return (
     <Container>
@@ -49,6 +47,7 @@ export const Favorites = () => {
                   avatar={item.avatar}
                   price={item.price}
                   ingredients={item.ingredients}
+                  icon
                 />
               );
             })}

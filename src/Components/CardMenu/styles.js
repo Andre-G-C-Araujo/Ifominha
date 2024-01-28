@@ -7,17 +7,13 @@ export const Container = styled.div`
   border: #192227 solid 2px;
 
   width: 100%;
+  .hidden {
+    display: none;
+    background-color: red;
+  }
 
   .heartIcon {
     color: ${({ theme }) => theme.COLORS.REDBLOOD};
-    display: flex;
-    position: relative;
-
-    margin-top: -1.2rem;
-
-    top: 1.5rem;
-    left: 11.5rem;
-    font-size: 1.3rem;
   }
 
   > img,
@@ -90,7 +86,16 @@ export const RightContentCard = styled.div`
   padding: 0.5rem;
 
   width: 70%;
+  .icon {
+    display: flex;
+    position: relative;
 
+    margin-top: -1.2rem;
+
+    top: 1.5rem;
+    left: 11.5rem;
+    font-size: 1.3rem;
+  }
   > h1 {
     font-size: 1.3rem;
     text-align: center;

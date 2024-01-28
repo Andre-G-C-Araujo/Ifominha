@@ -16,7 +16,7 @@ export function AppAdminRoutes() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/registeritem" element={<RegisterItem />} />
-      <Route path="/edititem" element={<EditItem />} />
+      <Route path="/edititem/:id" element={<EditItem />} />
       <Route path="/itemDetails/:id" element={<ItemDetails />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/menu" element={<Menu />} />

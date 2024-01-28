@@ -36,12 +36,18 @@ export const SearchContent = styled.div`
 `;
 
 export const ContentCards = styled.div`
+  --mixHeightContentMobile: 26rem;
   // border: "red solid 1px",
+
   display: flex;
   flex-wrap: wrap;
 
-  max-height: 24rem;
+  max-height: var(--mixHeightContentMobile);
+
   margin-bottom: 1rem;
+  @media (max-height: 750px) {
+    --mixHeightContentMobile: 17rem;
+  }
 
   overflow-x: auto;
 `;

@@ -10,8 +10,6 @@ export const Container = styled.div`
   height: 100vh;
 `;
 export const SearchContent = styled.div`
-  /* border: red solid 1px; */
-
   height: 85%;
 
   padding: 1rem 0rem;
@@ -35,11 +33,18 @@ export const SearchContent = styled.div`
 `;
 
 export const ContentCards = styled.div`
+  --mixHeightContentMobile: 31rem;
+  // border: "red solid 1px",
+
   display: flex;
   flex-wrap: wrap;
 
-  max-height: 28rem;
+  max-height: var(--mixHeightContentMobile);
+
   margin-bottom: 1rem;
+  @media (max-height: 750px) {
+    --mixHeightContentMobile: 17rem;
+  }
 
   overflow-x: auto;
 `;

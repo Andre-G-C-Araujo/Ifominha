@@ -1,5 +1,5 @@
 import { FaPlus, FaMinus } from "react-icons/fa6";
-import { FaRegHeart } from "react-icons/fa";
+import { FaRegHeart, FaEdit } from "react-icons/fa";
 
 import { Container } from "./styles";
 
@@ -11,8 +11,8 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useAuth } from "../../hooks/auth";
 
-export const Card = ({ name, avatar, price, plateId, arrayFav }) => {
-  const { handleStateFavorites, handleDeleteStateFavorite, client } = useAuth();
+export const Card = ({ name, avatar, price, plateId }) => {
+  const { handleStateFavorites, handleDeleteStateFavorite, admin } = useAuth();
 
   const avatarUrl = avatar
     ? `${api.defaults.baseURL}/files/${avatar}`
@@ -38,7 +38,9 @@ export const Card = ({ name, avatar, price, plateId, arrayFav }) => {
   function showDetailsItem(id) {
     navigate(`/itemdetails/${id}`);
   }
-
+  function redirectItemEdit(id) {
+    navigate(`/edititem/${id}`);
+  }
   async function handleIndexFavorites(id) {
     if (favIconColor === "") {
       setFavIconColor("heartIcon");
@@ -54,7 +56,6 @@ export const Card = ({ name, avatar, price, plateId, arrayFav }) => {
       const getArrayFavFromLocalStorage = localStorage.getItem(
         "@ifoominha:favorites"
       );
-      console.log(getArrayFavFromLocalStorage);
       const newArrayFav = JSON.parse(getArrayFavFromLocalStorage);
 
       if (newArrayFav) {
@@ -68,10 +69,14 @@ export const Card = ({ name, avatar, price, plateId, arrayFav }) => {
 
   return (
     <Container className="card">
-      <FaRegHeart
-        className={favIconColor}
-        onClick={() => handleIndexFavorites(plateId)}
-      />
+      {admin ? (
+        <FaEdit onClick={() => redirectItemEdit(plateId)} />
+      ) : (
+        <FaRegHeart
+          className={favIconColor}
+          onClick={() => handleIndexFavorites(plateId)}
+        />
+      )}
       <img
         src={avatarUrl}
         alt="Foto do prato escolhido"

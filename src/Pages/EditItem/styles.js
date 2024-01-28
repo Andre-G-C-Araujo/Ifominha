@@ -7,10 +7,10 @@ export const Heading = styled.header`
   font-size: 0.8rem;
 
   img {
-    width: 70%;
+    height: 12.5rem;
+    width: 12.5rem;
 
     margin: 1rem auto;
-    display: none;
 
     border-radius: 50%;
   }

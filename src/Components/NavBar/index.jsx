@@ -11,6 +11,7 @@ export const NavBar = () => {
   return (
     <Container>
       <MenuBar />
+      {/* <CartBar /> */}
       <Branch>
         <img src={imageBranch} alt="Logo da marca" />
         <h1>I Fóo minha</h1>
