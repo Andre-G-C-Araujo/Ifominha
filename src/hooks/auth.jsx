@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 import { api } from "../services/api";
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext({});
 
@@ -73,20 +74,20 @@ function AuthProvider({ children }) {
         localStorage.setItem("@ifoominha:client", JSON.stringify(client));
 
         setData({ client, tokenClient: data.tokenClient });
-        alert("Perfil Atualizado!");
+        toast.success("Perfil Atualizado!");
       }
       if (admin) {
         await api.put("/admin", admin);
         localStorage.setItem("@ifoominha:admin", JSON.stringify(admin));
 
         setData({ admin, tokenAdmin: data.tokenAdmin });
-        alert("Perfil Atualizado!");
+        toast.success("Perfil Atualizado!");
       }
     } catch (error) {
       if (error.response) {
-        alert(error.response.data.message);
+        toast.error(error.response.data.message);
       } else {
-        alert("Não foi possível atualizar o perfil.");
+        toast.error("Não foi possível atualizar o perfil.");
       }
     }
   }
