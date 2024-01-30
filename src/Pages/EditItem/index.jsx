@@ -59,6 +59,9 @@ export const EditItem = () => {
     console.log(ingredients);
     console.log(oldIngredients);
 
+    //Estou tentando deletar o ingredients.
+    //apos botao de salvar.
+
     if (newIngredients) {
       return toast.warn("Campo preenchido, mas não Confirmado. Revise!");
     }
@@ -71,7 +74,7 @@ export const EditItem = () => {
       price,
       description,
       ingredients,
-      // oldIngredients,
+      oldIngredients,
       prato_id: pratoId,
     });
   }
@@ -85,7 +88,6 @@ export const EditItem = () => {
       setDescription(response.data.description);
       setPrice(response.data.price);
       setPratoId(response.data.id);
-
       setOldIngredients(response.data.ingredients);
     }
     fetchPlate();

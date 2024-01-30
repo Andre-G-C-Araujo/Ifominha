@@ -39,7 +39,7 @@ export const CardMenu = ({
     setCounter(counter + 1);
   }
   function handleRemoveOneCounter() {
-    if (counter > 0) {
+    if (counter > 1) {
       setCounter(counter - 1);
     } else {
       toast.error("Já atingiu o minimo de itens");
@@ -77,7 +77,11 @@ export const CardMenu = ({
     <Container className={`card`}>
       <LeftContentCard>
         <h1>{name}</h1>
-        <img src={avatarUrl} alt="Foto do prato escolhido" />
+        <img
+          src={avatarUrl}
+          alt="Foto do prato escolhido"
+          onClick={() => showDetailsItem(plateId)}
+        />
         <p>{`Preço: ${decimalNumber}`}</p>
         <Button title={"Detalhes"} onClick={() => showDetailsItem(plateId)} />
       </LeftContentCard>
